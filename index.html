@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hakan Observatory Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">HO</div>
+        <div>
+          <p class="eyebrow">Academic Intelligence</p>
+          <h1>Hakan Observatory</h1>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <a href="#applications">Applications</a>
+        <a href="#universities">Universities</a>
+        <a href="#countries">Countries</a>
+        <a href="#mobility">Mobility Timeline</a>
+        <a href="#observations">Observations</a>
+        <a href="#variables">Variables</a>
+      </nav>
+
+      <div class="rule-card">
+        <span class="status-dot"></span>
+        <strong>Method rule</strong>
+        <p>Observations are inputs. Variables are calculated outputs. No observation means no prediction.</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Version 1 Dashboard</p>
+          <h2>Observation-driven decision support for academic mobility.</h2>
+          <p class="hero-copy">This interface only calculates variables from recorded observations. It does not invent or infer missing data.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="button button-secondary" id="clearData">Clear observations</button>
+        </div>
+      </header>
+
+      <section class="notice" id="dataNotice" role="status"></section>
+
+      <section class="summary-grid" aria-label="Dashboard summary">
+        <article class="metric-card">
+          <span>Applications</span>
+          <strong id="applicationCount">0</strong>
+          <small>Observed records</small>
+        </article>
+        <article class="metric-card">
+          <span>Universities</span>
+          <strong id="universityCount">0</strong>
+          <small>From observations</small>
+        </article>
+        <article class="metric-card">
+          <span>Countries</span>
+          <strong id="countryCount">0</strong>
+          <small>From observations</small>
+        </article>
+        <article class="metric-card">
+          <span>Calculated Variables</span>
+          <strong id="variableCount">0</strong>
+          <small>Outputs only</small>
+        </article>
+      </section>
+
+      <section class="panel" id="observations">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Inputs</p>
+            <h3>Observations</h3>
+          </div>
+          <span class="pill">Required before calculation</span>
+        </div>
+
+        <form class="observation-form" id="observationForm">
+          <label>
+            Applicant
+            <input name="applicant" type="text" placeholder="e.g. Aylin K." required />
+          </label>
+          <label>
+            University
+            <input name="university" type="text" placeholder="e.g. Lund University" required />
+          </label>
+          <label>
+            Country
+            <input name="country" type="text" placeholder="e.g. Sweden" required />
+          </label>
+          <label>
+            Status
+            <select name="status" required>
+              <option value="Submitted">Submitted</option>
+              <option value="Review">Review</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Deferred">Deferred</option>
+            </select>
+          </label>
+          <label>
+            Mobility Date
+            <input name="mobilityDate" type="date" required />
+          </label>
+          <label>
+            Observation Note
+            <input name="note" type="text" placeholder="Observed evidence or source" required />
+          </label>
+          <button class="button button-primary" type="submit">Add observation</button>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>University</th>
+                <th>Country</th>
+                <th>Status</th>
+                <th>Mobility Date</th>
+                <th>Observation</th>
+              </tr>
+            </thead>
+            <tbody id="observationTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="panel" id="applications">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Section 1</p>
+              <h3>Applications</h3>
+            </div>
+          </div>
+          <div id="applicationsList" class="stack-list"></div>
+        </section>
+
+        <section class="panel" id="universities">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Section 2</p>
+              <h3>Universities</h3>
+            </div>
+          </div>
+          <div id="universitiesList" class="stack-list"></div>
+        </section>
+
+        <section class="panel" id="countries">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Section 3</p>
+              <h3>Countries</h3>
+            </div>
+          </div>
+          <div id="countriesList" class="stack-list"></div>
+        </section>
+
+        <section class="panel" id="mobility">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Section 4</p>
+              <h3>Mobility Timeline</h3>
+            </div>
+          </div>
+          <ol id="timelineList" class="timeline"></ol>
+        </section>
+      </div>
+
+      <section class="panel" id="variables">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Outputs</p>
+            <h3>Variables calculated from observations</h3>
+          </div>
+          <span class="pill pill-blue">No observation = no prediction</span>
+        </div>
+        <div id="variablesGrid" class="variables-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
