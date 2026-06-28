@@ -102,3 +102,18 @@ body{
 .core-node{background:radial-gradient(ellipse at 38% 32%,#f7ffff 0 5%,#7df8ff 13%,#156278 34%,#081d2b 58%,rgba(3,7,16,.88) 78%,transparent 100%),radial-gradient(circle at 62% 58%,rgba(255,79,195,.34),transparent 34%);box-shadow:0 0 calc(26px + var(--organism-energy) * 28px) rgba(45,243,255,.56),0 0 calc(64px + var(--organism-energy) * 42px) rgba(24,118,255,.3),inset -12px -8px 32px rgba(0,0,0,.48),inset 10px 7px 26px rgba(156,255,255,.13)}
 .seat-node{transform:scale(.76);opacity:.74}.map-seat-hakan{transform:scale(.82)}.map-seat-gpt,.map-seat-codex{transform:scale(.68)}
 @keyframes branch-flow{to{stroke-dashoffset:-1}}
+
+/* Seeded tissue atmosphere and asymmetrical node growth override. */
+.svg-tissue-atmosphere{opacity:calc(.09 + var(--organism-energy) * .08);mix-blend-mode:screen;pointer-events:none;animation:tissue-breathe 31s ease-in-out infinite alternate}.svg-tissue-atmosphere rect{fill:url(#deepFiber)}.svg-tissue-atmosphere path{fill:none;stroke:url(#linkGlow);stroke-width:44;stroke-linecap:round;stroke-linejoin:round;opacity:.42;filter:url(#wideFiberBlur)}
+.organic-branchlet{opacity:var(--twig-opacity,.52)}
+.node-orientation{left:41.7%;top:6.8%;--drift-x:-2.7px;--drift-y:1.6px}.node-collapse{left:8.9%;top:10.7%;--drift-x:1.3px;--drift-y:-2.2px}.node-growth{right:7.6%;top:14.1%;--drift-x:-1.8px;--drift-y:2.9px}.node-relationality{left:3.4%;top:48.7%;--drift-x:2.6px;--drift-y:-1.1px}.node-consciousness{right:2.9%;top:43.2%;--drift-x:-2.4px;--drift-y:.7px}.node-tension{left:16.8%;bottom:6.1%;--drift-x:1.9px;--drift-y:1.2px}.node-mobility{right:10.7%;bottom:9.7%;--drift-x:-1.6px;--drift-y:-2.5px}.node-pressure{left:26.1%;top:29.4%;--drift-x:.9px;--drift-y:-1.9px}.node-risk{right:25.8%;top:24.9%;--drift-x:-2.1px;--drift-y:1.8px}.node-opening{left:40.6%;bottom:2.1%;--drift-x:2.2px;--drift-y:.6px}.micro-a{left:21.7%;top:15.9%}.micro-b{right:25.1%;top:10.8%}.micro-c{left:28.6%;bottom:21.3%}.micro-d{right:21.4%;bottom:27.7%}.micro-e{left:10.1%;top:62.8%}.micro-f{right:15.9%;top:55.4%}.map-seat-hakan{left:45.1%;top:29.4%}.map-seat-gpt{left:28.7%;top:54.1%}.map-seat-codex{right:32.8%;top:49.5%}
+@keyframes tissue-breathe{0%{transform:translate3d(-4px,2px,0) scale(1.006);opacity:.08}100%{transform:translate3d(5px,-3px,0) scale(1.024);opacity:.17}}
+@media (prefers-reduced-motion: reduce){.svg-tissue-atmosphere,.branch-field,.neural-link,.synapse-points ellipse,.signal,.neural-tissue,.synaptic-cloud,.free-sparks span{animation:none!important}.svg-tissue-atmosphere{opacity:.08}}
+
+/* Microscopic filament imperfection: grouped SVG distortion, rounded biological ends. */
+.neural-links path{stroke-linecap:round!important;stroke-linejoin:round!important}
+.living-links{filter:url(#filamentTremble) drop-shadow(0 0 5px rgba(100,200,255,.42)) drop-shadow(0 0 16px rgba(32,169,255,.2))}
+.branch-field{filter:url(#filamentTremble) drop-shadow(0 0 4px rgba(100,200,255,.34))}
+.membrane-filaments{filter:url(#filamentTrembleSoft);stroke-linecap:round;stroke-linejoin:round}
+.deep-dendrites{filter:url(#filamentTrembleSoft);stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion: reduce){.living-links,.branch-field{filter:url(#filamentTremble)}.membrane-filaments,.deep-dendrites{filter:url(#filamentTrembleSoft)}}
