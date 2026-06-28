@@ -23,6 +23,103 @@ const foundationalData = {
   }
 };
 
+
+const organicSeed = 73421;
+
+function createSeededRandom(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    return state / 4294967296;
+  };
+}
+
+function jitterPoint(point, random, amount = 18) {
+  return {
+    x: point.x + (random() - 0.5) * amount,
+    y: point.y + (random() - 0.5) * amount
+  };
+}
+
+function organicBezierPath(points, seedOffset = 0, bend = 34) {
+  const random = createSeededRandom(organicSeed + seedOffset);
+  const anchors = points.map((point, index) => jitterPoint(point, random, index === 0 ? 5 : 16 + random() * 11));
+  return anchors.slice(1).reduce((path, point, index) => {
+    const start = anchors[index];
+    const end = point;
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const length = Math.hypot(dx, dy) || 1;
+    const normal = { x: -dy / length, y: dx / length };
+    const phase = random() > 0.5 ? 1 : -1;
+    const c1 = {
+      x: start.x + dx * (0.22 + random() * 0.19) + normal.x * bend * phase * (0.35 + random()),
+      y: start.y + dy * (0.18 + random() * 0.22) + normal.y * bend * phase * (0.35 + random())
+    };
+    const c2 = {
+      x: start.x + dx * (0.68 + random() * 0.2) - normal.x * bend * phase * (0.25 + random()),
+      y: start.y + dy * (0.64 + random() * 0.21) - normal.y * bend * phase * (0.25 + random())
+    };
+    return `${path} C${c1.x.toFixed(1)} ${c1.y.toFixed(1)} ${c2.x.toFixed(1)} ${c2.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+  }, `M${anchors[0].x.toFixed(1)} ${anchors[0].y.toFixed(1)}`);
+}
+
+function applyOrganicHeroField() {
+  const svg = elements.organismMap?.querySelector('.neural-links');
+  if (!svg) return;
+
+  const coreAnchors = {
+    collapse: [{ x: 432.6, y: 309.4 }, { x: 377.8, y: 271.3 }, { x: 280.4, y: 194.6 }, { x: 158.2, y: 121.7 }, { x: 105.9, y: 215.3 }, { x: 122.7, y: 321.6 }],
+    growth: [{ x: 467.9, y: 314.8 }, { x: 529.7, y: 251.2 }, { x: 631.4, y: 172.9 }, { x: 742.6, y: 116.3 }, { x: 665.8, y: 222.5 }, { x: 815.2, y: 334.1 }],
+    relationality: [{ x: 426.7, y: 333.9 }, { x: 331.2, y: 316.4 }, { x: 222.5, y: 327.8 }, { x: 111.9, y: 320.6 }, { x: 255.7, y: 405.4 }, { x: 75.6, y: 452.2 }],
+    consciousness: [{ x: 474.1, y: 329.7 }, { x: 583.3, y: 303.5 }, { x: 726.9, y: 310.8 }, { x: 807.5, y: 336.7 }, { x: 657.1, y: 412.6 }, { x: 842.4, y: 462.8 }],
+    tension: [{ x: 441.8, y: 337.5 }, { x: 386.2, y: 421.7 }, { x: 291.6, y: 501.1 }, { x: 186.5, y: 538.9 }, { x: 354.3, y: 530.1 }, { x: 61.8, y: 476.2 }],
+    mobility: [{ x: 464.7, y: 342.6 }, { x: 547.4, y: 426.3 }, { x: 618.6, y: 502.8 }, { x: 709.1, y: 541.5 }, { x: 574.6, y: 529.7 }, { x: 856.2, y: 457.8 }],
+    pressure: [{ x: 443.2, y: 302.5 }, { x: 430.8, y: 237.4 }, { x: 449.1, y: 77.6 }, { x: 314.2, y: 213.5 }, { x: 437.2, y: 261.8 }],
+    opening: [{ x: 456.6, y: 339.2 }, { x: 459.1, y: 429.6 }, { x: 447.8, y: 599.1 }, { x: 605.4, y: 413.7 }, { x: 467.2, y: 372.4 }]
+  };
+
+  Object.entries(coreAnchors).forEach(([key, points], index) => {
+    const selector = key === 'consciousness' ? '#path-consciousness' : `#path-${key}`;
+    svg.querySelector(selector)?.setAttribute('d', organicBezierPath(points, index * 97, 41));
+  });
+
+  const secondaryPaths = svg.querySelectorAll('.living-links .neural-link.secondary');
+  const secondaryAnchors = [
+    [{ x: 151.4, y: 114.8 }, { x: 267.8, y: 73.2 }, { x: 451.2, y: 78.9 }, { x: 746.5, y: 116.4 }],
+    [{ x: 188.9, y: 539.2 }, { x: 323.6, y: 579.5 }, { x: 558.4, y: 586.1 }, { x: 714.9, y: 538.5 }],
+    [{ x: 314.5, y: 214.9 }, { x: 406.3, y: 156.2 }, { x: 531.7, y: 162.8 }, { x: 599.9, y: 219.6 }],
+    [{ x: 261.8, y: 317.6 }, { x: 361.9, y: 284.1 }, { x: 526.3, y: 282.7 }, { x: 646.8, y: 323.1 }]
+  ];
+  secondaryPaths.forEach((path, index) => path.setAttribute('d', organicBezierPath(secondaryAnchors[index], 900 + index * 53, 27)));
+
+  const ambientPaths = svg.querySelectorAll('.membrane-filaments path, .deep-dendrites path, .branch-field-far path, .branch-field-mid path, .branch-field-near path:not(.organic-branchlet)');
+  const ambientSources = Object.values(coreAnchors);
+  ambientPaths.forEach((path, index) => {
+    const source = ambientSources[index % ambientSources.length];
+    const offset = index % 2 === 0 ? source : [...source].reverse();
+    path.setAttribute('d', organicBezierPath(offset.slice(0, 4 + (index % 3)), 1700 + index * 29, index < 14 ? 56 : 31));
+  });
+
+  const branchLayer = svg.querySelector('.branch-field-near');
+  if (branchLayer && !branchLayer.dataset.seeded) {
+    const random = createSeededRandom(organicSeed + 404);
+    const sourcePoints = Object.values(coreAnchors).flat();
+    for (let index = 0; index < 30; index += 1) {
+      const start = sourcePoints[Math.floor(random() * sourcePoints.length)];
+      const points = [start];
+      for (let bendIndex = 0; bendIndex < 3 + Math.floor(random() * 3); bendIndex += 1) {
+        points.push({ x: start.x + (random() - 0.5) * (120 + bendIndex * 62), y: start.y + (random() - 0.5) * (95 + bendIndex * 54) });
+      }
+      const branch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      branch.setAttribute('d', organicBezierPath(points, 1300 + index * 31, 24));
+      branch.setAttribute('class', 'organic-branchlet');
+      branchLayer.appendChild(branch);
+    }
+    branchLayer.dataset.seeded = 'true';
+  }
+}
+
 const elements = {
   applicationCount: document.querySelector('#applicationCount'),
   universityCount: document.querySelector('#universityCount'),
@@ -358,6 +455,7 @@ function renderDashboard() {
   renderCountList(elements.countriesList, observations, 'country', 'Countries appear after observations are entered.');
   renderTimeline();
   renderVariables();
+  applyOrganicHeroField();
   renderPrediction();
 }
 
