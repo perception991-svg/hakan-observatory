@@ -1,5 +1,28 @@
 const observations = [];
 
+const foundationalData = {
+  englishReadiness: {
+    startingLevel: 'A2',
+    target2Months: 'B1',
+    target4Months: 'B2',
+    target6Months: 'B2/C1 bridge',
+    IELTS: 'downstream after foundation stabilizes',
+    status: 'active'
+  },
+  postConfessionEnergySettlement: {
+    tension: 'decreased',
+    observationCapacity: 'increased',
+    growthPotential: 'increased',
+    collapseRisk: 'decreased',
+    defeatedValues: 'remain nonzero',
+    supportPath: 'asana practice is stabilizing support path',
+    status: 'active'
+  },
+  englishRoadmap: {
+    status: 'active'
+  }
+};
+
 const elements = {
   applicationCount: document.querySelector('#applicationCount'),
   universityCount: document.querySelector('#universityCount'),
@@ -134,8 +157,22 @@ function calculateVariables(records) {
   ];
 }
 
+function hasActiveFoundationalData() {
+  return Object.values(foundationalData).some((record) => record.status === 'active');
+}
+
 function calculatePrediction(records) {
   if (records.length === 0) {
+    if (foundationalData.englishReadiness.status === 'active') {
+      return {
+        dominantDirection: 'English foundation',
+        collapseRisk: 'Reduced / conditional',
+        growthPotential: 'Active',
+        activeRelation: 'English Readiness → IELTS → Applications',
+        tensionNode: 'Timeline pressure'
+      };
+    }
+
     return {
       dominantDirection: 'Dormant',
       collapseRisk: 'Unavailable',
@@ -198,7 +235,9 @@ function renderPrediction() {
 
 function setNotice() {
   if (observations.length === 0) {
-    elements.dataNotice.textContent = 'No observations recorded. Variables and predictions are unavailable because the observatory does not invent data.';
+    elements.dataNotice.textContent = hasActiveFoundationalData()
+      ? 'Foundational observations active. Application observations are still empty.'
+      : 'No observations recorded. Variables and predictions are unavailable because the observatory does not invent data.';
     elements.dataNotice.classList.add('is-visible');
     return;
   }
