@@ -67,55 +67,68 @@
           </div>
         </div>
 
-        <section class="neural-stage" id="organismMap" aria-label="Living holographic neural organism map">
+        <section class="neural-stage" id="organismMap" aria-label="Living organic synaptic neural organism map">
           <div class="neural-tissue" aria-hidden="true"></div>
           <div class="synaptic-cloud" aria-hidden="true"></div>
+          <div class="fiber-field fiber-field-back" aria-hidden="true"></div>
+          <div class="fiber-field fiber-field-front" aria-hidden="true"></div>
           <svg class="neural-links" viewBox="0 0 900 640" role="img" aria-labelledby="mapTitle mapDesc">
-            <title id="mapTitle">Hakan neural observatory map</title>
-            <desc id="mapDesc">A central Hakan Core node connected to surrounding decision-state nodes and three distinct seats.</desc>
+            <title id="mapTitle">Hakan organic synaptic observatory map</title>
+            <desc id="mapDesc">A dense biological dendritic field with Hakan Core as a central neuron body, embedded ChatGPT and Codex junctions, and small surrounding conceptual synaptic clusters.</desc>
             <defs>
-              <linearGradient id="linkGlow" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#20f3ff"/><stop offset=".5" stop-color="#b86cff"/><stop offset="1" stop-color="#ff4fbc"/></linearGradient>
-              <filter id="softGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <linearGradient id="axonGlow" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#9effff"/><stop offset=".38" stop-color="#20f3ff"/><stop offset=".72" stop-color="#66ffd6"/><stop offset="1" stop-color="#b86cff"/></linearGradient>
+              <linearGradient id="axonWarm" x1="1" x2="0" y1="0" y2="1"><stop stop-color="#ff4fbc"/><stop offset=".45" stop-color="#ffd166"/><stop offset="1" stop-color="#2df3ff"/></linearGradient>
+              <filter id="organicGlow"><feGaussianBlur stdDeviation="3.6" result="blur"/><feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.1 0 0 0 0 0.92 0 0 0 0 1 0 0 0 .86 0" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="tissueBlur"><feGaussianBlur stdDeviation="1.2"/></filter>
             </defs>
-            <g class="living-links" filter="url(#softGlow)" stroke="url(#linkGlow)" stroke-width="1.7" fill="none" opacity=".76">
-              <path id="path-collapse" class="neural-link" data-link="collapse" d="M450 320 C330 210 240 160 150 112" pathLength="1"/><path id="path-growth" class="neural-link" data-link="growth" d="M450 320 C560 200 640 150 750 110" pathLength="1"/>
-              <path id="path-relationality" class="neural-link" data-link="relationality" d="M450 320 C310 310 220 300 112 325" pathLength="1"/><path id="path-consciousness" class="neural-link" data-link="tension" d="M450 320 C590 300 700 300 812 330" pathLength="1"/>
-              <path id="path-tension" class="neural-link" data-link="tension" d="M450 320 C365 430 300 505 190 542" pathLength="1"/><path id="path-mobility" class="neural-link" data-link="mobility" d="M450 320 C550 430 610 500 712 540" pathLength="1"/>
-              <path id="path-pressure" class="neural-link" data-link="academic" d="M450 320 C435 180 430 130 448 70" pathLength="1"/><path id="path-opening" class="neural-link" data-link="growth" d="M450 320 C455 470 460 535 448 600" pathLength="1"/>
-              <path class="neural-link secondary" data-link="growth" d="M150 112 C265 72 360 68 448 70" pathLength="1"/><path class="neural-link secondary" data-link="growth" d="M750 110 C640 78 535 65 448 70" pathLength="1"/>
-              <path class="neural-link secondary" data-link="collapse" d="M112 325 C170 420 200 485 190 542" pathLength="1"/><path class="neural-link secondary" data-link="mobility" d="M812 330 C790 430 760 500 712 540" pathLength="1"/>
-              <path class="neural-link secondary" data-link="mobility" d="M190 542 C330 580 560 585 712 540" pathLength="1"/><path class="neural-link secondary" data-link="collapse" d="M150 112 C105 190 90 255 112 325" pathLength="1"/>
-              <path class="neural-link secondary" data-link="tension" d="M750 110 C820 185 850 245 812 330" pathLength="1"/><path class="neural-link secondary" data-link="academic" d="M312 214 C415 155 525 155 598 218" opacity=".46" pathLength="1"/>
-              <path class="neural-link secondary" data-link="tension" d="M304 416 C420 480 532 470 606 410" opacity=".46" pathLength="1"/><path class="neural-link secondary" data-link="relationality" d="M260 318 C360 285 530 280 645 322" opacity=".4" pathLength="1"/>
+            <g class="deep-fibers" stroke="url(#axonGlow)" fill="none" filter="url(#tissueBlur)">
+              <path d="M42 118 C180 76 286 142 398 282 C510 418 668 480 858 424"/><path d="M70 486 C184 392 270 376 408 338 C548 300 664 184 828 128"/>
+              <path d="M156 44 C248 164 332 206 446 314 C548 410 610 528 766 604"/><path d="M112 606 C208 500 300 470 430 350 C562 228 666 196 858 230"/>
+              <path d="M28 326 C168 300 260 252 380 298 C520 352 652 350 886 312"/><path d="M272 24 C338 150 394 206 442 314 C498 440 526 520 604 628"/>
+              <path d="M664 18 C610 132 548 210 474 300 C382 412 298 472 206 626"/><path d="M10 206 C162 214 264 220 394 292 C524 364 672 390 884 536"/>
             </g>
-            <g class="signal-particles" filter="url(#softGlow)">
-              <circle class="signal signal-growth" r="4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#path-growth" /></animateMotion></circle>
-              <circle class="signal signal-collapse" r="4"><animateMotion dur="8.5s" repeatCount="indefinite"><mpath href="#path-collapse" /></animateMotion></circle>
-              <circle class="signal signal-tension" r="3.5"><animateMotion dur="6.5s" repeatCount="indefinite"><mpath href="#path-tension" /></animateMotion></circle>
-              <circle class="signal signal-mobility" r="3.5"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#path-mobility" /></animateMotion></circle>
-              <circle class="signal signal-opening" r="3"><animateMotion dur="7.5s" repeatCount="indefinite"><mpath href="#path-opening" /></animateMotion></circle>
+            <g class="living-links" filter="url(#organicGlow)" stroke="url(#axonGlow)" stroke-width="1.7" fill="none" opacity=".82">
+              <path id="path-collapse" class="neural-link dendrite main" data-link="collapse" d="M450 320 C390 260 326 202 252 166 C214 148 182 132 150 112 M252 166 C210 190 178 224 146 266 M310 214 C262 250 236 286 214 330" pathLength="1"/>
+              <path id="path-growth" class="neural-link dendrite main" data-link="growth" d="M450 320 C508 238 585 172 676 134 C706 122 730 116 750 110 M622 156 C656 196 698 220 764 238 M560 202 C610 248 648 286 690 338" pathLength="1"/>
+              <path id="path-relationality" class="neural-link dendrite main" data-link="relationality" d="M450 320 C360 300 286 294 210 310 C172 318 140 322 112 325 M238 306 C202 360 174 404 136 448 M306 300 C270 262 236 236 190 218" pathLength="1"/>
+              <path id="path-consciousness" class="neural-link dendrite main" data-link="tension" d="M450 320 C548 292 638 286 724 308 C758 318 790 326 812 330 M674 298 C710 254 750 220 820 194 M628 298 C690 354 728 390 770 456" pathLength="1"/>
+              <path id="path-tension" class="neural-link dendrite main warm" data-link="tension" d="M450 320 C392 394 326 472 242 520 C222 532 204 538 190 542 M292 486 C252 448 220 420 174 398 M350 418 C328 474 320 520 330 590" pathLength="1"/>
+              <path id="path-mobility" class="neural-link dendrite main" data-link="mobility" d="M450 320 C520 400 586 474 666 522 C684 532 700 538 712 540 M604 480 C642 442 674 408 722 382 M548 418 C586 474 596 532 590 602" pathLength="1"/>
+              <path id="path-pressure" class="neural-link dendrite main warm" data-link="academic" d="M450 320 C430 236 426 156 448 70 M432 174 C376 140 326 116 260 96 M438 214 C486 156 530 126 598 98" pathLength="1"/>
+              <path id="path-opening" class="neural-link dendrite main" data-link="growth" d="M450 320 C468 414 468 508 448 600 M462 438 C414 480 374 514 314 548 M460 488 C514 516 558 548 620 598" pathLength="1"/>
+              <path class="neural-link secondary" data-link="growth" d="M148 108 C258 62 356 64 448 70 C566 78 650 82 752 110" pathLength="1"/><path class="neural-link secondary" data-link="mobility" d="M112 325 C204 430 344 490 450 320 C576 492 648 530 712 540" pathLength="1"/>
+              <path class="neural-link secondary warm" data-link="tension" d="M150 112 C268 220 312 372 190 542 C340 586 546 590 712 540 C778 432 806 382 812 330 C826 242 812 178 750 110" pathLength="1"/>
+              <path class="neural-link capillary" d="M312 214 C414 150 526 154 598 218" pathLength="1"/><path class="neural-link capillary" d="M304 416 C420 486 538 472 606 410" pathLength="1"/><path class="neural-link capillary" d="M260 318 C360 276 530 276 645 322" pathLength="1"/>
+            </g>
+            <g class="synapse-dots" aria-hidden="true">
+              <circle cx="150" cy="112" r="3"/><circle cx="750" cy="110" r="3.5"/><circle cx="112" cy="325" r="3"/><circle cx="812" cy="330" r="3"/><circle cx="190" cy="542" r="3.2"/><circle cx="712" cy="540" r="3.2"/><circle cx="448" cy="70" r="3"/><circle cx="448" cy="600" r="3"/><circle cx="252" cy="166" r="2"/><circle cx="622" cy="156" r="2"/><circle cx="604" cy="480" r="2"/><circle cx="432" cy="174" r="2"/><circle cx="462" cy="438" r="2"/>
+            </g>
+            <g class="signal-particles" filter="url(#organicGlow)">
+              <circle class="signal signal-growth" r="3"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#path-growth" /></animateMotion></circle>
+              <circle class="signal signal-collapse" r="2.8"><animateMotion dur="8.5s" repeatCount="indefinite"><mpath href="#path-collapse" /></animateMotion></circle>
+              <circle class="signal signal-tension" r="2.6"><animateMotion dur="6.5s" repeatCount="indefinite"><mpath href="#path-tension" /></animateMotion></circle>
+              <circle class="signal signal-mobility" r="2.6"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#path-mobility" /></animateMotion></circle>
+              <circle class="signal signal-opening" r="2.4"><animateMotion dur="7.5s" repeatCount="indefinite"><mpath href="#path-opening" /></animateMotion></circle>
             </g>
           </svg>
 
-          <div class="node core-node organism-node" data-node="core"><strong>Hakan Core</strong><span>decision center</span></div>
-          <div class="node primary node-orientation organism-node" data-node="orientation">Orientation<span>dominant direction</span></div>
-          <div class="node primary node-collapse organism-node" data-node="collapse">Collapse<span>failure gravity</span></div>
-          <div class="node primary node-growth organism-node" data-node="growth">Growth<span>expansion vector</span></div>
-          <div class="node primary node-relationality organism-node" data-node="relationality">Relationality<span>active influence</span></div>
-          <div class="node primary node-consciousness organism-node" data-node="tension">Consciousness Displacement<span>inner drift</span></div>
-          <div class="node primary node-tension organism-node" data-node="tension">Decision Tension<span>choice pressure</span></div>
-          <div class="node primary node-mobility organism-node" data-node="mobility">Mobility<span>movement path</span></div>
-          <div class="node primary node-pressure organism-node" data-node="academic">Academic Pressure<span>institutional force</span></div>
-          <div class="node primary node-risk organism-node" data-node="temporal">Temporal Risk<span>deadline field</span></div>
-          <div class="node primary node-opening organism-node" data-node="growth">Potential Opening<span>emergent passage</span></div>
+          <div class="node core-node organism-node" data-node="core"><strong>Hakan Core</strong><span>neural body</span></div>
+          <div class="node primary node-orientation organism-node" data-node="orientation">Orientation<span>direction</span></div>
+          <div class="node primary node-collapse organism-node" data-node="collapse">Collapse<span>gravity</span></div>
+          <div class="node primary node-growth organism-node" data-node="growth">Growth<span>expansion</span></div>
+          <div class="node primary node-relationality organism-node" data-node="relationality">Relationality<span>influence</span></div>
+          <div class="node primary node-consciousness organism-node" data-node="tension">Decision Tension<span>inner drift</span></div>
+          <div class="node primary node-mobility organism-node" data-node="mobility">Mobility<span>movement</span></div>
+          <div class="node primary node-risk organism-node" data-node="temporal">Temporal Risk<span>deadline</span></div>
+          <div class="node primary node-opening organism-node" data-node="growth">Potential Opening<span>passage</span></div>
 
-          <div class="node micro micro-a">blockage</div><div class="node micro micro-b">reinforcement</div><div class="node micro micro-c">suppression</div>
-          <div class="node micro micro-d">causality</div><div class="node micro micro-e">redirection</div><div class="node micro micro-f">drift</div>
+          <div class="node micro micro-a">blockage</div><div class="node micro micro-b">reinforce</div><div class="node micro micro-c">suppress</div>
+          <div class="node micro micro-d">causality</div><div class="node micro micro-e">redirect</div><div class="node micro micro-f">drift</div>
 
           <div class="seat-node map-seat-hakan organism-seat" data-node="core">Hakan Seat</div>
           <div class="seat-node map-seat-gpt organism-seat" data-node="academic">ChatGPT Seat</div>
           <div class="seat-node map-seat-codex organism-seat" data-node="growth">Codex Seat</div>
-        <div class="free-sparks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="free-sparks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </section>
       </header>
 
