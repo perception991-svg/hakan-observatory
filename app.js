@@ -1,3 +1,38 @@
+const demoObservations = [
+  {
+    applicant: 'Aylin K.',
+    university: 'Lund University',
+    country: 'Sweden',
+    status: 'Accepted',
+    mobilityDate: '2026-08-20',
+    note: 'Offer letter recorded by admissions office'
+  },
+  {
+    applicant: 'Emir T.',
+    university: 'TU Delft',
+    country: 'Netherlands',
+    status: 'Review',
+    mobilityDate: '2026-09-05',
+    note: 'Application portal shows committee review'
+  },
+  {
+    applicant: 'Mina S.',
+    university: 'University of Bologna',
+    country: 'Italy',
+    status: 'Submitted',
+    mobilityDate: '2026-09-15',
+    note: 'Submission receipt uploaded to observatory'
+  },
+  {
+    applicant: 'Jonas R.',
+    university: 'Lund University',
+    country: 'Sweden',
+    status: 'Deferred',
+    mobilityDate: '2027-01-12',
+    note: 'Deferral notice observed in applicant record'
+  }
+];
+
 const observations = [];
 
 const elements = {
@@ -13,6 +48,7 @@ const elements = {
   variablesGrid: document.querySelector('#variablesGrid'),
   dataNotice: document.querySelector('#dataNotice'),
   form: document.querySelector('#observationForm'),
+  loadDemo: document.querySelector('#loadDemo'),
   clearData: document.querySelector('#clearData')
 };
 
@@ -200,6 +236,11 @@ elements.form.addEventListener('submit', (event) => {
   renderDashboard();
 });
 
+
+elements.loadDemo.addEventListener('click', () => {
+  observations.splice(0, observations.length, ...demoObservations.map((record) => ({ ...record })));
+  renderDashboard();
+});
 
 elements.clearData.addEventListener('click', () => {
   observations.splice(0, observations.length);
