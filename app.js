@@ -386,4 +386,46 @@ elements.clearData.addEventListener('click', () => {
   renderDashboard();
 });
 
+
+function startSynapticFieldDrift() {
+  const stage = elements.organismMap;
+  if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const driftingClusters = [...stage.querySelectorAll('.organism-node, .organism-seat')].map((node, index) => ({
+    node,
+    phase: index * 0.73,
+    amplitude: node.classList.contains('core-node') ? 1.2 : node.classList.contains('seat-node') ? 1.8 : 2.6,
+    speed: node.classList.contains('core-node') ? 0.00018 : 0.00012 + (index % 5) * 0.000025
+  }));
+
+  const driftingLayers = [...stage.querySelectorAll('.branch-field, .synapse-points, .membrane-filaments, .deep-dendrites')].map((layer, index) => ({
+    layer,
+    phase: index * 1.17,
+    amplitude: index < 2 ? 1.8 : 1.1,
+    speed: 0.00008 + index * 0.000018
+  }));
+
+  function evolve(timestamp) {
+    driftingClusters.forEach(({ node, phase, amplitude, speed }) => {
+      const x = Math.sin(timestamp * speed + phase) * amplitude;
+      const y = Math.cos(timestamp * speed * 1.37 + phase * 0.7) * amplitude * 0.72;
+      node.style.setProperty('--drift-x', `${x.toFixed(2)}px`);
+      node.style.setProperty('--drift-y', `${y.toFixed(2)}px`);
+    });
+
+    driftingLayers.forEach(({ layer, phase, amplitude, speed }) => {
+      const x = Math.sin(timestamp * speed + phase) * amplitude;
+      const y = Math.cos(timestamp * speed * 1.29 + phase) * amplitude;
+      layer.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`;
+    });
+
+    requestAnimationFrame(evolve);
+  }
+
+  requestAnimationFrame(evolve);
+}
+
 renderDashboard();
+startSynapticFieldDrift();
