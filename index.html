@@ -21,18 +21,22 @@
       </div>
 
       <nav class="nav-list">
+        <a href="#foundation">Foundation</a>
+        <a href="#prediction">Prediction</a>
+        <a href="#neural-organism">Neural Organism</a>
         <a href="#applications">Applications</a>
         <a href="#universities">Universities</a>
         <a href="#countries">Countries</a>
         <a href="#mobility">Mobility Timeline</a>
         <a href="#observations">Observations</a>
         <a href="#variables">Variables</a>
+        <a href="#containment">Containment Review</a>
       </nav>
 
       <div class="rule-card">
         <span class="status-dot"></span>
         <strong>Method rule</strong>
-        <p>Observations are inputs. Variables are calculated outputs. No observation means no prediction.</p>
+        <p>Observations are inputs. Variables are calculated outputs. Uncontained does not automatically mean dangerous.</p>
       </div>
     </aside>
 
@@ -40,8 +44,8 @@
       <header class="hero">
         <div>
           <p class="eyebrow">Version 1 Dashboard</p>
-          <h2>Observation-driven decision support for academic mobility.</h2>
-          <p class="hero-copy">This interface only calculates variables from recorded observations. It does not invent or infer missing data.</p>
+          <h2>Observation-driven decision support rooted in English readiness.</h2>
+          <p class="hero-copy">The first real system observation now reorganizes applications around English learning readiness before IELTS measurement.</p>
         </div>
         <div class="hero-actions">
           <button class="button button-secondary" id="clearData">Clear observations</button>
@@ -49,6 +53,60 @@
       </header>
 
       <section class="notice" id="dataNotice" role="status"></section>
+
+      <section class="foundation-banner" id="foundation">
+        <div>
+          <p class="eyebrow">First foundational observation</p>
+          <h3 id="foundationStatement"></h3>
+          <p id="foundationEffect"></p>
+        </div>
+        <dl class="foundation-meta" id="foundationMeta"></dl>
+      </section>
+
+      <section class="panel prediction-panel" id="prediction">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Prediction field</p>
+            <h3>Root-level forecast</h3>
+          </div>
+          <span class="pill pill-red" id="predictionState">Conditional</span>
+        </div>
+        <div class="primary-move">
+          <span>Primary move</span>
+          <strong id="primaryMove"></strong>
+        </div>
+        <div class="prediction-grid" id="predictionGrid"></div>
+      </section>
+
+      <section class="panel neural-panel" id="neural-organism">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Neural organism</p>
+            <h3>Field reorganized by foundational data</h3>
+          </div>
+          <span class="pill pill-blue">English Readiness → IELTS → Applications</span>
+        </div>
+        <div class="neural-map is-foundational-active" aria-label="Animated neural map showing English Readiness as the dominant node">
+          <div class="neural-relation relation-readiness-ielts"></div>
+          <div class="neural-relation relation-ielts-applications"></div>
+          <div class="neural-relation relation-growth-readiness"></div>
+          <div class="neural-relation relation-energy-wonder"></div>
+          <div class="neural-relation relation-asana-stability"></div>
+          <div class="neural-relation relation-defeat-growth"></div>
+          <div class="neural-node node-readiness">English<br />Readiness</div>
+          <div class="neural-node node-ielts">IELTS</div>
+          <div class="neural-node node-applications">Applications</div>
+          <div class="neural-node node-timeline">Timeline<br />Pressure</div>
+          <div class="neural-node node-tension">Decision<br />Tension</div>
+          <div class="neural-node node-growth">Growth<br />Potential</div>
+          <div class="neural-node node-energy">Energy<br />Settlement</div>
+          <div class="neural-node node-wonder">Wonder<br />Observation</div>
+          <div class="neural-node node-ontology">Ontological<br />Attention</div>
+          <div class="neural-node node-asana">Asana<br />Practice</div>
+          <div class="neural-node node-stability">Embodied<br />Stability</div>
+          <div class="neural-node node-defeat">Nonzero<br />Defeat Values</div>
+        </div>
+      </section>
 
       <section class="summary-grid" aria-label="Dashboard summary">
         <article class="metric-card">
@@ -84,16 +142,24 @@
 
         <form class="observation-form" id="observationForm">
           <label>
+            Observation Type
+            <select name="type" id="observationType" required>
+              <option value="application">Application</option>
+              <option value="language_readiness">Language readiness</option>
+              <option value="post_confession_energy_settlement">Post-confession energy settlement</option>
+            </select>
+          </label>
+          <label>
             Applicant
-            <input name="applicant" type="text" placeholder="e.g. Aylin K." required />
+            <input name="applicant" type="text" placeholder="e.g. Aylin K." />
           </label>
           <label>
             University
-            <input name="university" type="text" placeholder="e.g. Lund University" required />
+            <input name="university" type="text" placeholder="e.g. Lund University" />
           </label>
           <label>
             Country
-            <input name="country" type="text" placeholder="e.g. Sweden" required />
+            <input name="country" type="text" placeholder="e.g. Sweden" />
           </label>
           <label>
             Status
@@ -107,9 +173,32 @@
           </label>
           <label>
             Mobility Date
-            <input name="mobilityDate" type="date" required />
+            <input name="mobilityDate" type="date" />
           </label>
           <label>
+            Containment
+            <select name="containment" required>
+              <option value="Contained">Contained</option>
+              <option value="Uncontained">Uncontained</option>
+            </select>
+          </label>
+          <label>
+            Observed Risk
+            <select name="risk" required>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </label>
+          <label>
+            Observer Concern
+            <select name="concern" required>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </label>
+          <label class="span-two">
             Observation Note
             <input name="note" type="text" placeholder="Observed evidence or source" required />
           </label>
@@ -120,11 +209,15 @@
           <table>
             <thead>
               <tr>
+                <th>Type</th>
                 <th>Applicant</th>
                 <th>University</th>
                 <th>Country</th>
                 <th>Status</th>
                 <th>Mobility Date</th>
+                <th>Containment</th>
+                <th>Risk</th>
+                <th>Observer Concern</th>
                 <th>Observation</th>
               </tr>
             </thead>
@@ -174,6 +267,17 @@
           <ol id="timelineList" class="timeline"></ol>
         </section>
       </div>
+
+      <section class="panel" id="containment">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Interpretive Check</p>
+            <h3>Containment review</h3>
+          </div>
+          <span class="pill pill-green">Evidence before fear</span>
+        </div>
+        <div id="containmentGrid" class="containment-grid"></div>
+      </section>
 
       <section class="panel" id="variables">
         <div class="panel-heading">
