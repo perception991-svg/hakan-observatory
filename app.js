@@ -13,7 +13,12 @@ const elements = {
   variablesGrid: document.querySelector('#variablesGrid'),
   dataNotice: document.querySelector('#dataNotice'),
   form: document.querySelector('#observationForm'),
-  clearData: document.querySelector('#clearData')
+  clearData: document.querySelector('#clearData'),
+  dominantDirection: document.querySelector('#dominantDirection'),
+  collapseRisk: document.querySelector('#collapseRisk'),
+  growthPotential: document.querySelector('#growthPotential'),
+  activeRelation: document.querySelector('#activeRelation'),
+  tensionNode: document.querySelector('#tensionNode')
 };
 
 function groupByCount(records, key) {
@@ -54,6 +59,66 @@ function calculateVariables(records) {
       detail: 'Submitted plus review statuses from observations'
     }
   ];
+}
+
+function calculatePrediction(records) {
+  if (records.length === 0) {
+    return {
+      dominantDirection: 'Dormant',
+      collapseRisk: 'Unavailable',
+      growthPotential: 'Unavailable',
+      activeRelation: 'Unavailable',
+      tensionNode: 'Unavailable'
+    };
+  }
+
+  const statusCounts = groupByCount(records, 'status');
+  const acceptedCount = statusCounts.Accepted || 0;
+  const rejectedCount = statusCounts.Rejected || 0;
+  const deferredCount = statusCounts.Deferred || 0;
+  const reviewCount = statusCounts.Review || 0;
+  const submittedCount = statusCounts.Submitted || 0;
+  const activeCount = reviewCount + submittedCount;
+  const countryCount = uniqueCount(records, 'country');
+
+  const dominantDirection = acceptedCount > rejectedCount
+    ? 'Opening / growth'
+    : activeCount > rejectedCount
+      ? 'Review drift'
+      : rejectedCount > 0
+        ? 'Collapse pressure'
+        : 'Orientation forming';
+
+  const collapseRisk = rejectedCount + deferredCount === 0
+    ? 'Low signal'
+    : `${Math.round(((rejectedCount + deferredCount) / records.length) * 100)}% pressure`;
+
+  const growthPotential = acceptedCount === 0
+    ? `${activeCount} active pathway${activeCount === 1 ? '' : 's'}`
+    : `${Math.round((acceptedCount / records.length) * 100)}% opening`;
+
+  const activeRelation = countryCount > 1
+    ? 'Mobility ↔ Relationality'
+    : 'Orientation ↔ Academic Pressure';
+
+  const tensionNode = deferredCount > 0
+    ? 'Temporal Risk'
+    : rejectedCount > acceptedCount
+      ? 'Collapse'
+      : activeCount > 0
+        ? 'Decision Tension'
+        : 'Potential Opening';
+
+  return { dominantDirection, collapseRisk, growthPotential, activeRelation, tensionNode };
+}
+
+function renderPrediction() {
+  const prediction = calculatePrediction(observations);
+  elements.dominantDirection.textContent = prediction.dominantDirection;
+  elements.collapseRisk.textContent = prediction.collapseRisk;
+  elements.growthPotential.textContent = prediction.growthPotential;
+  elements.activeRelation.textContent = prediction.activeRelation;
+  elements.tensionNode.textContent = prediction.tensionNode;
 }
 
 function setNotice() {
@@ -179,6 +244,7 @@ function renderDashboard() {
   renderCountList(elements.countriesList, observations, 'country', 'Countries appear after observations are entered.');
   renderTimeline();
   renderVariables();
+  renderPrediction();
 }
 
 function readObservation(formData) {
