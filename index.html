@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="organism-dormant">
   <div class="space-noise" aria-hidden="true"></div>
   <div class="shell">
     <aside class="sidebar" aria-label="Observatory navigation">
@@ -67,7 +67,9 @@
           </div>
         </div>
 
-        <section class="neural-stage" aria-label="Holographic neural prediction map">
+        <section class="neural-stage" id="organismMap" aria-label="Living holographic neural organism map">
+          <div class="neural-tissue" aria-hidden="true"></div>
+          <div class="synaptic-cloud" aria-hidden="true"></div>
           <svg class="neural-links" viewBox="0 0 900 640" role="img" aria-labelledby="mapTitle mapDesc">
             <title id="mapTitle">Hakan neural observatory map</title>
             <desc id="mapDesc">A central Hakan Core node connected to surrounding decision-state nodes and three distinct seats.</desc>
@@ -75,37 +77,45 @@
               <linearGradient id="linkGlow" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#20f3ff"/><stop offset=".5" stop-color="#b86cff"/><stop offset="1" stop-color="#ff4fbc"/></linearGradient>
               <filter id="softGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             </defs>
-            <g filter="url(#softGlow)" stroke="url(#linkGlow)" stroke-width="1.7" fill="none" opacity=".76">
-              <path d="M450 320 C330 210 240 160 150 112"/><path d="M450 320 C560 200 640 150 750 110"/>
-              <path d="M450 320 C310 310 220 300 112 325"/><path d="M450 320 C590 300 700 300 812 330"/>
-              <path d="M450 320 C365 430 300 505 190 542"/><path d="M450 320 C550 430 610 500 712 540"/>
-              <path d="M450 320 C435 180 430 130 448 70"/><path d="M450 320 C455 470 460 535 448 600"/>
-              <path d="M150 112 C265 72 360 68 448 70"/><path d="M750 110 C640 78 535 65 448 70"/>
-              <path d="M112 325 C170 420 200 485 190 542"/><path d="M812 330 C790 430 760 500 712 540"/>
-              <path d="M190 542 C330 580 560 585 712 540"/><path d="M150 112 C105 190 90 255 112 325"/>
-              <path d="M750 110 C820 185 850 245 812 330"/><path d="M312 214 C415 155 525 155 598 218" opacity=".46"/>
-              <path d="M304 416 C420 480 532 470 606 410" opacity=".46"/><path d="M260 318 C360 285 530 280 645 322" opacity=".4"/>
+            <g class="living-links" filter="url(#softGlow)" stroke="url(#linkGlow)" stroke-width="1.7" fill="none" opacity=".76">
+              <path id="path-collapse" class="neural-link" data-link="collapse" d="M450 320 C330 210 240 160 150 112" pathLength="1"/><path id="path-growth" class="neural-link" data-link="growth" d="M450 320 C560 200 640 150 750 110" pathLength="1"/>
+              <path id="path-relationality" class="neural-link" data-link="relationality" d="M450 320 C310 310 220 300 112 325" pathLength="1"/><path id="path-consciousness" class="neural-link" data-link="tension" d="M450 320 C590 300 700 300 812 330" pathLength="1"/>
+              <path id="path-tension" class="neural-link" data-link="tension" d="M450 320 C365 430 300 505 190 542" pathLength="1"/><path id="path-mobility" class="neural-link" data-link="mobility" d="M450 320 C550 430 610 500 712 540" pathLength="1"/>
+              <path id="path-pressure" class="neural-link" data-link="academic" d="M450 320 C435 180 430 130 448 70" pathLength="1"/><path id="path-opening" class="neural-link" data-link="growth" d="M450 320 C455 470 460 535 448 600" pathLength="1"/>
+              <path class="neural-link secondary" data-link="growth" d="M150 112 C265 72 360 68 448 70" pathLength="1"/><path class="neural-link secondary" data-link="growth" d="M750 110 C640 78 535 65 448 70" pathLength="1"/>
+              <path class="neural-link secondary" data-link="collapse" d="M112 325 C170 420 200 485 190 542" pathLength="1"/><path class="neural-link secondary" data-link="mobility" d="M812 330 C790 430 760 500 712 540" pathLength="1"/>
+              <path class="neural-link secondary" data-link="mobility" d="M190 542 C330 580 560 585 712 540" pathLength="1"/><path class="neural-link secondary" data-link="collapse" d="M150 112 C105 190 90 255 112 325" pathLength="1"/>
+              <path class="neural-link secondary" data-link="tension" d="M750 110 C820 185 850 245 812 330" pathLength="1"/><path class="neural-link secondary" data-link="academic" d="M312 214 C415 155 525 155 598 218" opacity=".46" pathLength="1"/>
+              <path class="neural-link secondary" data-link="tension" d="M304 416 C420 480 532 470 606 410" opacity=".46" pathLength="1"/><path class="neural-link secondary" data-link="relationality" d="M260 318 C360 285 530 280 645 322" opacity=".4" pathLength="1"/>
+            </g>
+            <g class="signal-particles" filter="url(#softGlow)">
+              <circle class="signal signal-growth" r="4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#path-growth" /></animateMotion></circle>
+              <circle class="signal signal-collapse" r="4"><animateMotion dur="8.5s" repeatCount="indefinite"><mpath href="#path-collapse" /></animateMotion></circle>
+              <circle class="signal signal-tension" r="3.5"><animateMotion dur="6.5s" repeatCount="indefinite"><mpath href="#path-tension" /></animateMotion></circle>
+              <circle class="signal signal-mobility" r="3.5"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#path-mobility" /></animateMotion></circle>
+              <circle class="signal signal-opening" r="3"><animateMotion dur="7.5s" repeatCount="indefinite"><mpath href="#path-opening" /></animateMotion></circle>
             </g>
           </svg>
 
-          <div class="node core-node"><strong>Hakan Core</strong><span>decision center</span></div>
-          <div class="node primary node-orientation">Orientation<span>dominant direction</span></div>
-          <div class="node primary node-collapse">Collapse<span>failure gravity</span></div>
-          <div class="node primary node-growth">Growth<span>expansion vector</span></div>
-          <div class="node primary node-relationality">Relationality<span>active influence</span></div>
-          <div class="node primary node-consciousness">Consciousness Displacement<span>inner drift</span></div>
-          <div class="node primary node-tension">Decision Tension<span>choice pressure</span></div>
-          <div class="node primary node-mobility">Mobility<span>movement path</span></div>
-          <div class="node primary node-pressure">Academic Pressure<span>institutional force</span></div>
-          <div class="node primary node-risk">Temporal Risk<span>deadline field</span></div>
-          <div class="node primary node-opening">Potential Opening<span>emergent passage</span></div>
+          <div class="node core-node organism-node" data-node="core"><strong>Hakan Core</strong><span>decision center</span></div>
+          <div class="node primary node-orientation organism-node" data-node="orientation">Orientation<span>dominant direction</span></div>
+          <div class="node primary node-collapse organism-node" data-node="collapse">Collapse<span>failure gravity</span></div>
+          <div class="node primary node-growth organism-node" data-node="growth">Growth<span>expansion vector</span></div>
+          <div class="node primary node-relationality organism-node" data-node="relationality">Relationality<span>active influence</span></div>
+          <div class="node primary node-consciousness organism-node" data-node="tension">Consciousness Displacement<span>inner drift</span></div>
+          <div class="node primary node-tension organism-node" data-node="tension">Decision Tension<span>choice pressure</span></div>
+          <div class="node primary node-mobility organism-node" data-node="mobility">Mobility<span>movement path</span></div>
+          <div class="node primary node-pressure organism-node" data-node="academic">Academic Pressure<span>institutional force</span></div>
+          <div class="node primary node-risk organism-node" data-node="temporal">Temporal Risk<span>deadline field</span></div>
+          <div class="node primary node-opening organism-node" data-node="growth">Potential Opening<span>emergent passage</span></div>
 
           <div class="node micro micro-a">blockage</div><div class="node micro micro-b">reinforcement</div><div class="node micro micro-c">suppression</div>
           <div class="node micro micro-d">causality</div><div class="node micro micro-e">redirection</div><div class="node micro micro-f">drift</div>
 
-          <div class="seat-node map-seat-hakan">Hakan Seat</div>
-          <div class="seat-node map-seat-gpt">ChatGPT Seat</div>
-          <div class="seat-node map-seat-codex">Codex Seat</div>
+          <div class="seat-node map-seat-hakan organism-seat" data-node="core">Hakan Seat</div>
+          <div class="seat-node map-seat-gpt organism-seat" data-node="academic">ChatGPT Seat</div>
+          <div class="seat-node map-seat-codex organism-seat" data-node="growth">Codex Seat</div>
+        <div class="free-sparks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </section>
       </header>
 

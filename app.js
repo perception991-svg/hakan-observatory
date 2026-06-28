@@ -18,8 +18,81 @@ const elements = {
   collapseRisk: document.querySelector('#collapseRisk'),
   growthPotential: document.querySelector('#growthPotential'),
   activeRelation: document.querySelector('#activeRelation'),
-  tensionNode: document.querySelector('#tensionNode')
+  tensionNode: document.querySelector('#tensionNode'),
+  organismMap: document.querySelector('#organismMap'),
+  neuralNodes: document.querySelectorAll('.organism-node, .organism-seat'),
+  neuralLinks: document.querySelectorAll('.neural-link'),
+  predictionCards: document.querySelectorAll('#predictionGrid article')
 };
+
+function clamp(value, min = 0, max = 1) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function deriveOrganismState(records) {
+  const total = records.length;
+  const statusCounts = groupByCount(records, 'status');
+  const accepted = statusCounts.Accepted || 0;
+  const rejected = statusCounts.Rejected || 0;
+  const deferred = statusCounts.Deferred || 0;
+  const review = statusCounts.Review || 0;
+  const submitted = statusCounts.Submitted || 0;
+  const active = review + submitted;
+  const countrySpread = uniqueCount(records, 'country');
+
+  const growthPotential = total === 0 ? 0.08 : clamp((accepted * 1.15 + active * 0.28) / total);
+  const collapseRisk = total === 0 ? 0.08 : clamp((rejected * 1.1 + deferred * 0.8) / total);
+  const tension = total === 0 ? 0.08 : clamp((active * 0.9 + deferred * 0.55 + rejected * 0.25) / total);
+  const mobilityDrift = total === 0 ? 0.08 : clamp((countrySpread * 0.16) + (active / Math.max(1, total)) * 0.2);
+  const energy = clamp(0.12 + total * 0.11 + growthPotential * 0.18 + collapseRisk * 0.16 + tension * 0.14 + mobilityDrift * 0.08);
+
+  const mode = energy > 0.82 || tension > 0.74 ? 'overloaded' : energy > 0.55 ? 'active' : energy > 0.22 ? 'sensing' : 'dormant';
+  const dominantKey = growthPotential >= collapseRisk && growthPotential >= tension ? 'growth' : collapseRisk >= tension ? 'collapse' : 'tension';
+  const dominantDirection = total === 0 ? 'dormant' : dominantKey;
+  const strongestRelation = mobilityDrift > 0.54 && dominantKey !== 'collapse' ? 'mobility' : dominantKey === 'tension' ? 'academic' : dominantKey;
+  const highestTensionNode = collapseRisk > 0.58 ? 'collapse' : tension > 0.5 ? 'tension' : mobilityDrift > 0.5 ? 'mobility' : growthPotential > 0.5 ? 'growth' : 'orientation';
+  const hue = dominantKey === 'growth' ? 146 : dominantKey === 'collapse' ? 326 : dominantKey === 'tension' ? 42 : 186;
+
+  return { total, energy, collapseRisk, growthPotential, tension, mobilityDrift, mode, dominantDirection, strongestRelation, highestTensionNode, hue };
+}
+
+function applyOrganismState(state) {
+  const root = document.documentElement;
+  root.style.setProperty('--organism-energy', state.energy.toFixed(2));
+  root.style.setProperty('--collapse-intensity', state.collapseRisk.toFixed(2));
+  root.style.setProperty('--growth-intensity', state.growthPotential.toFixed(2));
+  root.style.setProperty('--tension-intensity', state.tension.toFixed(2));
+  root.style.setProperty('--mobility-intensity', state.mobilityDrift.toFixed(2));
+  root.style.setProperty('--prediction-pulse-speed', `${(7 - state.energy * 3.7).toFixed(2)}s`);
+  root.style.setProperty('--core-heartbeat-speed', `${(6.8 - state.energy * 3.5).toFixed(2)}s`);
+  root.style.setProperty('--dominant-hue', state.hue);
+
+  document.body.classList.remove('organism-dormant', 'organism-sensing', 'organism-active', 'organism-overloaded');
+  document.body.classList.add(`organism-${state.mode}`);
+  elements.organismMap?.setAttribute('data-organism-state', state.mode);
+
+  elements.neuralNodes.forEach((node) => {
+    const nodeType = node.dataset.node;
+    const isGrowthPath = state.dominantDirection === 'growth' && nodeType === 'growth';
+    const isCollapsePath = state.dominantDirection === 'collapse' && (nodeType === 'collapse' || nodeType === 'temporal');
+    const isTensionPath = state.dominantDirection === 'tension' && (nodeType === 'tension' || nodeType === 'academic');
+    node.classList.toggle('is-hot', isGrowthPath || isCollapsePath || isTensionPath);
+    node.classList.toggle('is-tension', nodeType === state.highestTensionNode || (state.highestTensionNode === 'tension' && nodeType === 'academic'));
+    const intensity = nodeType === 'growth' ? state.growthPotential : nodeType === 'collapse' || nodeType === 'temporal' ? state.collapseRisk : nodeType === 'mobility' ? state.mobilityDrift : nodeType === 'academic' || nodeType === 'tension' ? state.tension : state.energy;
+    node.style.setProperty('--node-intensity', intensity.toFixed(2));
+  });
+
+  elements.neuralLinks.forEach((link) => {
+    const linkType = link.dataset.link;
+    const isDominant = linkType === state.dominantDirection || (state.dominantDirection === 'tension' && (linkType === 'academic' || linkType === 'tension'));
+    link.classList.toggle('is-dominant', isDominant);
+    link.classList.toggle('is-strongest', linkType === state.strongestRelation);
+  });
+
+  elements.predictionCards.forEach((card) => card.classList.remove('is-dominant'));
+  const cardIndex = state.dominantDirection === 'growth' ? 2 : state.dominantDirection === 'collapse' ? 1 : state.dominantDirection === 'tension' ? 4 : 0;
+  elements.predictionCards[cardIndex]?.classList.add('is-dominant');
+}
 
 function groupByCount(records, key) {
   return records.reduce((accumulator, record) => {
@@ -113,6 +186,8 @@ function calculatePrediction(records) {
 }
 
 function renderPrediction() {
+  const organismState = deriveOrganismState(observations);
+  applyOrganismState(organismState);
   const prediction = calculatePrediction(observations);
   elements.dominantDirection.textContent = prediction.dominantDirection;
   elements.collapseRisk.textContent = prediction.collapseRisk;
