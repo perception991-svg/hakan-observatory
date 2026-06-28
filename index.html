@@ -74,11 +74,21 @@
             <title id="mapTitle">Organic synaptic hero field</title>
             <desc id="mapDesc">An asymmetrical living synaptic field grown from the Hakan Core, with branching dendrites, drifting signal pulses, and ChatGPT and Codex seats held as smaller support synapses.</desc>
             <defs>
-              <linearGradient id="linkGlow" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#87fbff"/><stop offset=".42" stop-color="#26d6ff"/><stop offset="1" stop-color="#5f8dff"/></linearGradient>
-              <linearGradient id="deepFiber" x1="1" x2="0" y1="0" y2="1"><stop stop-color="#0d576a"/><stop offset=".5" stop-color="#2feeff"/><stop offset="1" stop-color="#1642a0"/></linearGradient>
-              <radialGradient id="synapseGlow"><stop stop-color="#ffffff"/><stop offset=".28" stop-color="#9ffcff"/><stop offset="1" stop-color="#29c9ff" stop-opacity="0"/></radialGradient>
+              <linearGradient id="linkGlow" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#77f8ff" stop-opacity="0"/><stop offset=".18" stop-color="#7efbff" stop-opacity=".42"/><stop offset=".46" stop-color="#2be4ff" stop-opacity=".95"/><stop offset=".74" stop-color="#8ea4ff" stop-opacity=".5"/><stop offset="1" stop-color="#b995ff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="deepFiber" x1="1" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#11366f" stop-opacity="0"/><stop offset=".28" stop-color="#147ca1" stop-opacity=".24"/><stop offset=".56" stop-color="#52f5ff" stop-opacity=".68"/><stop offset=".86" stop-color="#576cff" stop-opacity=".2"/><stop offset="1" stop-color="#08133e" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="nearFiber" x1=".5" x2=".5" y1=".45" y2="1">
+                <stop offset="0" stop-color="#f8ffff" stop-opacity=".9"/><stop offset=".25" stop-color="#88fbff" stop-opacity=".82"/><stop offset=".6" stop-color="#3aa8ff" stop-opacity=".34"/><stop offset="1" stop-color="#9d76ff" stop-opacity="0"/>
+              </linearGradient>
+              <radialGradient id="synapseGlow" cx="42%" cy="36%" r="68%">
+                <stop offset="0" stop-color="#ffffff" stop-opacity="1"/><stop offset=".18" stop-color="#ceffff" stop-opacity=".94"/><stop offset=".48" stop-color="#38e8ff" stop-opacity=".5"/><stop offset="1" stop-color="#29c9ff" stop-opacity="0"/>
+              </radialGradient>
               <filter id="softGlow"><feGaussianBlur stdDeviation="3.8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <filter id="deepBlur"><feGaussianBlur stdDeviation="1.8"/></filter>
+              <filter id="wideFiberBlur"><feGaussianBlur stdDeviation="5.8"/></filter>
+              <filter id="deepBlur"><feGaussianBlur stdDeviation="2.2"/></filter>
             </defs>
             <g class="membrane-filaments" stroke="url(#deepFiber)" fill="none" filter="url(#deepBlur)">
               <path d="M450 320 C360 252 290 198 198 146 S92 90 44 54"/>
@@ -98,6 +108,16 @@
               <path d="M450 320 C435 228 427 145 448 70 C410 120 365 161 312 214 C366 201 407 219 438 260"/>
               <path d="M450 320 C463 430 463 520 448 600 C498 548 542 492 606 410 C552 430 503 411 466 370"/>
             </g>
+
+            <g class="branch-field branch-field-far" fill="none" aria-hidden="true">
+              <path d="M266 204 C224 162 188 136 150 112 C118 91 91 70 44 54"/><path d="M266 204 C214 201 156 210 96 214 C62 218 38 228 18 252"/><path d="M235 205 C209 248 157 284 112 325 C82 350 50 374 22 407"/><path d="M657 214 C696 164 723 134 750 110 C789 78 829 55 874 40"/><path d="M657 214 C711 196 758 208 814 232 C846 245 872 263 895 292"/><path d="M657 214 C681 262 742 300 812 330 C846 345 876 368 898 400"/><path d="M250 398 C190 396 118 413 70 450 C42 472 24 495 8 530"/><path d="M661 409 C729 398 792 421 845 464 C872 486 890 510 905 544"/><path d="M358 532 C302 552 245 573 190 542 C153 520 111 501 58 474"/><path d="M575 531 C628 560 675 569 712 540 C766 518 814 497 858 460"/>
+            </g>
+            <g class="branch-field branch-field-mid" fill="none" aria-hidden="true">
+              <path d="M450 320 C381 276 326 238 266 204 C234 176 207 144 150 112"/><path d="M450 320 C519 273 586 247 657 214 C690 176 712 138 750 110"/><path d="M450 320 C371 328 296 356 250 398 C213 430 178 475 190 542"/><path d="M450 320 C536 334 612 369 661 409 C692 454 717 497 712 540"/><path d="M438 260 C402 224 355 218 312 214 C275 210 245 207 207 190"/><path d="M466 370 C511 405 558 421 606 410 C646 399 685 392 728 408"/><path d="M450 320 C434 247 426 157 448 70 C457 121 492 164 544 199"/><path d="M450 320 C462 415 463 520 448 600 C420 548 386 520 340 503"/>
+            </g>
+            <g class="branch-field branch-field-near" fill="none" aria-hidden="true">
+              <path d="M450 320 C414 304 380 282 342 252 C320 230 298 217 266 204"/><path d="M450 320 C488 294 520 267 560 240 C589 226 621 218 657 214"/><path d="M450 320 C405 342 364 370 332 402 C306 430 279 457 248 477"/><path d="M450 320 C491 351 531 375 575 395 C608 410 637 429 664 458"/><path d="M450 320 C435 295 433 273 438 260 C443 244 440 228 426 210"/><path d="M450 320 C465 343 468 360 466 370 C463 392 470 414 487 436"/><path d="M450 320 C421 322 382 318 338 306 C305 294 282 292 260 318"/><path d="M450 320 C485 315 533 314 586 319 C614 322 632 323 645 322"/>
+            </g>
             <g class="living-links" filter="url(#softGlow)" stroke="url(#linkGlow)" stroke-width="1.7" fill="none" opacity=".76">
               <path id="path-collapse" class="neural-link trunk" data-link="collapse" d="M450 320 C346 242 281 168 150 112 C188 148 211 173 235 205 M235 205 C190 187 144 190 96 214 M235 205 C210 253 155 284 112 325" pathLength="1"/>
               <path id="path-growth" class="neural-link trunk" data-link="growth" d="M450 320 C546 222 624 154 750 110 C704 152 682 180 657 214 M657 214 C700 196 753 200 814 232 M657 214 C676 266 740 298 812 330" pathLength="1"/>
@@ -113,7 +133,13 @@
               <path class="neural-link secondary" data-link="relationality" d="M260 318 C360 285 530 280 645 322" opacity=".4" pathLength="1"/>
             </g>
             <g class="synapse-points" filter="url(#softGlow)">
-              <circle cx="450" cy="320" r="17"/><circle cx="150" cy="112" r="7"/><circle cx="750" cy="110" r="7"/><circle cx="112" cy="325" r="6"/><circle cx="812" cy="330" r="6"/><circle cx="190" cy="542" r="6"/><circle cx="712" cy="540" r="6"/><circle cx="448" cy="70" r="5"/><circle cx="448" cy="600" r="5"/><circle cx="312" cy="214" r="4"/><circle cx="598" cy="218" r="4"/><circle cx="304" cy="416" r="4"/><circle cx="606" cy="410" r="4"/>
+              <ellipse class="soma-glow" cx="450" cy="320" rx="28" ry="22"/>
+              <ellipse cx="150" cy="112" rx="10" ry="7" transform="rotate(-18 150 112)"/><ellipse cx="750" cy="110" rx="9" ry="7" transform="rotate(21 750 110)"/>
+              <ellipse cx="112" cy="325" rx="8" ry="5" transform="rotate(28 112 325)"/><ellipse cx="812" cy="330" rx="8" ry="5" transform="rotate(-24 812 330)"/>
+              <ellipse cx="190" cy="542" rx="8" ry="5" transform="rotate(-12 190 542)"/><ellipse cx="712" cy="540" rx="8" ry="5" transform="rotate(16 712 540)"/>
+              <ellipse cx="448" cy="70" rx="7" ry="5" transform="rotate(9 448 70)"/><ellipse cx="448" cy="600" rx="7" ry="5" transform="rotate(-8 448 600)"/>
+              <ellipse cx="312" cy="214" rx="5" ry="3.5" transform="rotate(32 312 214)"/><ellipse cx="598" cy="218" rx="5" ry="3.5" transform="rotate(-27 598 218)"/>
+              <ellipse cx="304" cy="416" rx="5" ry="3.5" transform="rotate(-16 304 416)"/><ellipse cx="606" cy="410" rx="5" ry="3.5" transform="rotate(22 606 410)"/>
             </g>
             <g class="signal-particles" filter="url(#softGlow)">
               <circle class="signal signal-growth" r="3"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#path-growth" /></animateMotion></circle>
