@@ -1001,3 +1001,190 @@ tr:last-child td {
     transform: rotate(-142deg);
   }
 }
+
+.prediction-visual {
+  position: relative;
+  min-height: 140px;
+  overflow: hidden;
+  border: 1px solid rgba(40, 84, 216, 0.14);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(20, 184, 166, 0.14), transparent 12rem),
+    linear-gradient(135deg, rgba(248, 250, 252, 0.92), rgba(239, 246, 255, 0.88));
+  margin-bottom: 18px;
+}
+
+.prediction-orbit {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  min-width: 132px;
+  min-height: 42px;
+  border: 1px solid rgba(40, 84, 216, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  animation: predictionFloat 5s ease-in-out infinite;
+}
+
+.orbit-readiness {
+  left: 7%;
+  top: 48px;
+  border-color: rgba(20, 184, 166, 0.42);
+  color: #0f766e;
+}
+
+.orbit-ielts {
+  left: 34%;
+  top: 26px;
+  animation-delay: -0.9s;
+}
+
+.orbit-applications {
+  left: 59%;
+  top: 70px;
+  opacity: 0.7;
+  animation-delay: -1.8s;
+}
+
+.orbit-settlement {
+  right: 7%;
+  top: 34px;
+  border-color: rgba(134, 239, 172, 0.52);
+  color: #15803d;
+  animation-delay: -2.7s;
+}
+
+.prediction-visual.is-settling .orbit-settlement,
+.prediction-visual.is-settling .orbit-readiness {
+  box-shadow: 0 14px 34px rgba(20, 184, 166, 0.18), 0 0 28px rgba(134, 239, 172, 0.22);
+}
+
+.prediction-visual.is-readiness-gated .orbit-ielts,
+.prediction-visual.is-readiness-gated .orbit-applications {
+  filter: saturate(0.78);
+}
+
+.organism-seats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.organism-seat {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(40, 84, 216, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  padding: 16px;
+}
+
+.organism-seat::after {
+  position: absolute;
+  inset: auto -32px -48px auto;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.12);
+  content: "";
+}
+
+.organism-seat span {
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.organism-seat strong {
+  display: block;
+  margin-top: 8px;
+  letter-spacing: -0.03em;
+}
+
+.hakan-core {
+  border-color: rgba(20, 184, 166, 0.32);
+  box-shadow: 0 14px 30px rgba(20, 184, 166, 0.10);
+}
+
+.chatgpt-seat {
+  border-color: rgba(124, 58, 237, 0.22);
+}
+
+.codex-seat {
+  border-color: rgba(40, 84, 216, 0.22);
+}
+
+.living-neural-organism {
+  isolation: isolate;
+}
+
+.living-neural-organism::before {
+  position: absolute;
+  inset: 26px;
+  z-index: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  content: "";
+  animation: organismBreath 7s ease-in-out infinite;
+}
+
+.living-neural-organism .neural-node,
+.living-neural-organism .neural-relation {
+  z-index: 1;
+}
+
+.living-neural-organism.has-energy-settlement::before {
+  border-color: rgba(134, 239, 172, 0.18);
+  box-shadow: inset 0 0 80px rgba(20, 184, 166, 0.08);
+}
+
+.living-neural-organism.has-readiness-pressure .node-readiness {
+  animation-duration: 3.4s;
+}
+
+@keyframes predictionFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes organismBreath {
+  0%, 100% { transform: scale(0.98); opacity: 0.48; }
+  50% { transform: scale(1.02); opacity: 0.82; }
+}
+
+@media (max-width: 980px) {
+  .organism-seats {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-visual {
+    min-height: 260px;
+  }
+
+  .orbit-readiness,
+  .orbit-ielts,
+  .orbit-applications,
+  .orbit-settlement {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .orbit-readiness { top: 28px; }
+  .orbit-ielts { top: 88px; }
+  .orbit-applications { top: 148px; }
+  .orbit-settlement { top: 208px; }
+
+  @keyframes predictionFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+}

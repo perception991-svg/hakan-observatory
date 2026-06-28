@@ -75,6 +75,12 @@
           <span>Primary move</span>
           <strong id="primaryMove"></strong>
         </div>
+        <div class="prediction-visual" id="predictionVisual" aria-label="Animated prediction state">
+          <div class="prediction-orbit orbit-readiness"><span>English Readiness</span></div>
+          <div class="prediction-orbit orbit-ielts"><span>IELTS Milestone</span></div>
+          <div class="prediction-orbit orbit-applications"><span>Applications</span></div>
+          <div class="prediction-orbit orbit-settlement"><span>Energy Settlement</span></div>
+        </div>
         <div class="prediction-grid" id="predictionGrid"></div>
       </section>
 
@@ -84,9 +90,23 @@
             <p class="eyebrow">Neural organism</p>
             <h3>Field reorganized by foundational data</h3>
           </div>
-          <span class="pill pill-blue">English Readiness → IELTS → Applications</span>
+          <span class="pill pill-blue" id="organismState">Living / settling</span>
         </div>
-        <div class="neural-map is-foundational-active" aria-label="Animated neural map showing English Readiness as the dominant node">
+        <div class="organism-seats" aria-label="Living organism seats">
+          <article class="organism-seat hakan-core" id="hakanCore">
+            <span>Hakan Core</span>
+            <strong>Observer / chooser</strong>
+          </article>
+          <article class="organism-seat chatgpt-seat" id="chatgptSeat">
+            <span>ChatGPT Seat</span>
+            <strong>Reflection / synthesis</strong>
+          </article>
+          <article class="organism-seat codex-seat" id="codexSeat">
+            <span>Codex Seat</span>
+            <strong>Implementation / structure</strong>
+          </article>
+        </div>
+        <div class="neural-map living-neural-organism is-foundational-active" id="livingNeuralOrganism" aria-label="Animated living neural organism map showing English Readiness as the root node">
           <div class="neural-relation relation-readiness-ielts"></div>
           <div class="neural-relation relation-ielts-applications"></div>
           <div class="neural-relation relation-growth-readiness"></div>

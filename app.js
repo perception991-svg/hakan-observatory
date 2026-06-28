@@ -43,6 +43,12 @@ const elements = {
   primaryMove: document.querySelector('#primaryMove'),
   predictionState: document.querySelector('#predictionState'),
   predictionGrid: document.querySelector('#predictionGrid'),
+  predictionVisual: document.querySelector('#predictionVisual'),
+  organismState: document.querySelector('#organismState'),
+  livingNeuralOrganism: document.querySelector('#livingNeuralOrganism'),
+  hakanCore: document.querySelector('#hakanCore'),
+  chatgptSeat: document.querySelector('#chatgptSeat'),
+  codexSeat: document.querySelector('#codexSeat'),
   observationTable: document.querySelector('#observationTable'),
   applicationsList: document.querySelector('#applicationsList'),
   universitiesList: document.querySelector('#universitiesList'),
@@ -383,6 +389,26 @@ function renderPredictionPanel() {
   `).join('');
 }
 
+function renderLivingOrganismState() {
+  const readinessUnresolved = isEnglishReadinessUnresolved(observations);
+  const energySettlementActive = Boolean(getEnergySettlement(observations));
+
+  elements.organismState.textContent = readinessUnresolved && energySettlementActive
+    ? 'Living / settling'
+    : readinessUnresolved
+      ? 'Living / tense'
+      : 'Living / open';
+
+  elements.livingNeuralOrganism.classList.toggle('has-energy-settlement', energySettlementActive);
+  elements.livingNeuralOrganism.classList.toggle('has-readiness-pressure', readinessUnresolved);
+  elements.predictionVisual.classList.toggle('is-settling', energySettlementActive);
+  elements.predictionVisual.classList.toggle('is-readiness-gated', readinessUnresolved);
+
+  elements.hakanCore.dataset.state = energySettlementActive ? 'settled-observer' : 'observing';
+  elements.chatgptSeat.dataset.state = readinessUnresolved ? 'reflecting-readiness' : 'synthesizing';
+  elements.codexSeat.dataset.state = energySettlementActive ? 'structuring-nonzero-data' : 'implementing';
+}
+
 function renderVariables() {
   const variables = calculateVariables(observations);
   elements.variableCount.textContent = variables.length;
@@ -410,6 +436,7 @@ function renderDashboard() {
   setNotice();
   renderFoundation();
   renderPredictionPanel();
+  renderLivingOrganismState();
   renderObservationTable();
   renderApplications();
   renderCountList(elements.universitiesList, applicationRecords, 'university', 'Universities appear after observations are entered.');
