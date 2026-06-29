@@ -1,2 +1,3 @@
-# hakan-observatory
-Observation-driven academic observatory for applications, mobility, education and decision support.
+# First Speaker
+
+A restrained cognitive signal instrument for structured interpretation, warning, and decision support.
