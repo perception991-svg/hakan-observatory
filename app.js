@@ -134,6 +134,8 @@ const elements = {
   dataNotice: document.querySelector('#dataNotice'),
   form: document.querySelector('#observationForm'),
   clearData: document.querySelector('#clearData'),
+  speakerToggle: document.querySelector('#speakerToggle'),
+  speakerSilence: document.querySelector('#speakerSilence'),
   dominantDirection: document.querySelector('#dominantDirection'),
   collapseRisk: document.querySelector('#collapseRisk'),
   growthPotential: document.querySelector('#growthPotential'),
@@ -484,6 +486,17 @@ elements.clearData.addEventListener('click', () => {
   renderDashboard();
 });
 
+function setSpeakerAwake(isAwake) {
+  document.body.classList.toggle('speaker-awake', isAwake);
+  document.body.classList.toggle('speaker-dormant', !isAwake);
+  if (elements.speakerToggle) {
+    elements.speakerToggle.textContent = isAwake ? 'Field Engaged' : 'Engage Speaker';
+    elements.speakerToggle.setAttribute('aria-pressed', String(isAwake));
+  }
+}
+
+elements.speakerToggle?.addEventListener('click', () => setSpeakerAwake(true));
+elements.speakerSilence?.addEventListener('click', () => setSpeakerAwake(false));
 
 function startSynapticFieldDrift() {
   const stage = elements.organismMap;
