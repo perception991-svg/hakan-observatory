@@ -131,3 +131,36 @@ body{background:radial-gradient(circle at 50% 25%,rgba(216,173,86,.09),transpare
 .neural-links,.living-links,.deep-dendrites,.membrane-filaments,.branch-field,.synapse-points,.signal{mix-blend-mode:screen}.neural-link,.neural-link.trunk{stroke:url(#linkGlow);filter:drop-shadow(0 0 5px rgba(216,173,86,.42)) drop-shadow(0 0 18px rgba(216,173,86,.15));animation:synaptic-current 10s linear infinite,dendritic-glimmer 9s ease-in-out infinite}.signal,.signal-growth,.signal-opening,.signal-collapse,.signal-tension,.signal-mobility{fill:#f1d28e;color:#f1d28e}.node,.seat-node{background:radial-gradient(ellipse at 42% 36%,rgba(255,244,216,.88) 0 5%,rgba(216,173,86,.55) 13%,rgba(106,75,30,.22) 42%,rgba(0,0,0,0) 74%);box-shadow:0 0 10px rgba(216,173,86,.34),0 0 42px rgba(216,173,86,.14);text-shadow:0 0 12px rgba(255,244,216,.5);color:#fff4d8}.node span{color:rgba(240,225,195,.66)}.core-node{background:radial-gradient(ellipse at 38% 32%,#fff4d8 0 5%,#d8ad56 15%,#604018 42%,rgba(3,3,3,.88) 78%,transparent 100%);box-shadow:0 0 34px rgba(216,173,86,.34),0 0 90px rgba(216,173,86,.16),inset -12px -8px 32px rgba(0,0,0,.5)}
 .instrument-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}@media(max-width:980px){.instrument-grid{grid-template-columns:1fr}}@keyframes poly-float{0%,100%{transform:translate(-50%,-50%) rotateX(58deg) rotateZ(45deg) translateY(0)}50%{transform:translate(-50%,-50%) rotateX(58deg) rotateZ(50deg) translateY(-9px)}}@keyframes poly-breathe{0%,100%{opacity:.62;filter:brightness(.95)}50%{opacity:.94;filter:brightness(1.14)}}
 .panel-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}.button-compact{padding:8px 12px;font-size:.78rem}
+
+/* Active Field Engaged refinement: restrained cognitive instrument, no dashboard nodes. */
+.speaker-awake .neural-stage{
+  background:
+    radial-gradient(ellipse at 50% 50%,rgba(216,173,86,.105),transparent 13rem),
+    radial-gradient(ellipse at 50% 50%,rgba(255,244,216,.028),transparent 27rem),
+    linear-gradient(145deg,#020202 0%,#080706 52%,#010101 100%);
+  box-shadow:inset 0 0 130px rgba(216,173,86,.045),inset 0 0 240px rgba(0,0,0,.86),0 34px 100px rgba(0,0,0,.52);
+}
+.speaker-awake .dormant-polyhedron{
+  opacity:.92;
+  filter:drop-shadow(0 0 24px rgba(216,173,86,.34)) drop-shadow(0 0 74px rgba(216,173,86,.09));
+}
+.speaker-awake .dormant-polyhedron span,
+.speaker-awake .dormant-polyhedron i,
+.speaker-awake .dormant-polyhedron b{
+  border-color:rgba(255,238,190,.48);
+  background:linear-gradient(135deg,rgba(255,244,216,.62),rgba(216,173,86,.24) 35%,rgba(67,45,15,.16) 72%,rgba(0,0,0,.2));
+  box-shadow:inset 0 0 24px rgba(255,244,216,.1),0 0 30px rgba(216,173,86,.14);
+}
+.speaker-awake .neural-tissue{opacity:.18;background-image:radial-gradient(circle,rgba(216,173,86,.18) 0 1px,transparent 1.5px);background-size:52px 52px;filter:none}
+.speaker-awake .synaptic-cloud{opacity:.12;background:conic-gradient(from 218deg at 52% 50%,transparent,rgba(216,173,86,.12),transparent 14%,rgba(255,244,216,.04),transparent 34%);filter:blur(58px)}
+.speaker-awake .neural-links{opacity:.62}.speaker-awake .membrane-filaments{opacity:.16;filter:blur(1px)}.speaker-awake .deep-dendrites{opacity:.18;filter:blur(.7px)}.speaker-awake .branch-field{opacity:.2}.speaker-awake .living-links{opacity:.48;filter:none}
+.speaker-awake .neural-link,.speaker-awake .neural-link.trunk,.speaker-awake .neural-link.secondary{stroke:url(#linkGlow);stroke-width:.72px!important;opacity:.36!important;filter:drop-shadow(0 0 3px rgba(216,173,86,.22));stroke-dasharray:.018 .055 .06 .09;animation:synaptic-current 18s linear infinite,dendritic-glimmer 13s ease-in-out infinite}
+.speaker-awake .neural-link.trunk{stroke-width:.95px!important;opacity:.45!important}.speaker-awake .neural-link.secondary{stroke-width:.42px!important;opacity:.22!important}.speaker-awake .neural-link.is-dominant,.speaker-awake .neural-link.is-strongest{stroke-width:1.05px!important;opacity:.5!important;filter:drop-shadow(0 0 5px rgba(216,173,86,.28))}
+.speaker-awake .synapse-points{opacity:.22}.speaker-awake .synapse-points ellipse{rx:2.2px;ry:1.45px;fill:#d8ad56;opacity:.26;filter:none}.speaker-awake .synapse-points .soma-glow{rx:9px;ry:7px;opacity:.18}
+.speaker-awake .signal{r:1.25px;opacity:.32;filter:drop-shadow(0 0 4px rgba(216,173,86,.24))}.speaker-awake .free-sparks{opacity:.22}.speaker-awake .free-sparks span{width:1.5px;height:1.5px;background:#d8ad56;box-shadow:0 0 7px rgba(216,173,86,.36);opacity:.38}
+.speaker-awake .node,.speaker-awake .seat-node{
+  width:auto;height:auto;min-width:0;padding:0;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;text-shadow:0 0 7px rgba(216,173,86,.22);color:rgba(255,244,216,.46);font-size:.47rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.38;filter:none!important;backdrop-filter:none;place-items:center;pointer-events:none;z-index:6;
+}
+.speaker-awake .node:before,.speaker-awake .node:after,.speaker-awake .seat-node:before,.speaker-awake .seat-node:after{display:none!important}.speaker-awake .node span{display:block;margin-top:2px;color:rgba(216,173,86,.28);font-size:.4rem;font-weight:600;letter-spacing:.08em}.speaker-awake .primary{width:70px;height:auto}.speaker-awake .micro{opacity:.24;font-size:.38rem;color:rgba(216,173,86,.34)}
+.speaker-awake .core-node{left:50%;top:64%;transform:translateX(-50%);font-size:.52rem;color:rgba(255,244,216,.52);opacity:.46}.speaker-awake .core-node strong{font-weight:800}.speaker-awake .core-node span{color:rgba(216,173,86,.28)}
+.speaker-awake .seat-node{font-size:.4rem;color:rgba(216,173,86,.32);opacity:.3}.speaker-awake .organism-node.is-hot,.speaker-awake .organism-seat.is-hot,.speaker-awake .organism-node.is-tension,.speaker-awake .organism-seat.is-tension{filter:none!important;box-shadow:none!important;color:rgba(255,244,216,.52)}
