@@ -117,3 +117,18 @@ body{
 .membrane-filaments{filter:url(#filamentTrembleSoft);stroke-linecap:round;stroke-linejoin:round}
 .deep-dendrites{filter:url(#filamentTrembleSoft);stroke-linecap:round;stroke-linejoin:round}
 @media (prefers-reduced-motion: reduce){.living-links,.branch-field{filter:url(#filamentTremble)}.membrane-filaments,.deep-dendrites{filter:url(#filamentTrembleSoft)}}
+
+/* Holographic dashboard protocol layer: non-visual academic data representation. */
+.holographic-panel{
+  border-color:rgba(45,243,255,.32);
+  background:linear-gradient(145deg,rgba(8,18,38,.9),rgba(5,8,22,.74));
+}
+.holographic-summary{margin:0 0 18px;color:#d8fbff;line-height:1.7;font-weight:800}
+.holographic-grid,.holographic-flow{display:grid;gap:12px}
+.holographic-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:14px}
+.holographic-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+.holographic-grid article,.holographic-flow article{border:1px solid rgba(45,243,255,.2);border-radius:18px;background:rgba(45,243,255,.055);padding:15px;box-shadow:inset 0 0 24px rgba(45,243,255,.035)}
+.holographic-grid span,.holographic-grid small,.holographic-flow span,.holographic-flow small{display:block;color:var(--muted);font-weight:800}
+.holographic-grid strong,.holographic-flow strong{display:block;margin:7px 0;color:#fff;font-family:"Space Grotesk";font-size:1rem;overflow-wrap:anywhere}
+@media (max-width:1180px){.holographic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.holographic-grid,.holographic-flow{grid-template-columns:1fr}}
